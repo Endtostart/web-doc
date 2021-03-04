@@ -1,27 +1,41 @@
 package com.example.webdoc.controller;
 
-import com.example.webdoc.controller.vo.ActivityVO;
 import com.example.webdoc.controller.vo.Result;
+import com.example.webdoc.controller.vo.UserVO;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 用户相关接口
+ */
 @RestController
-@RequestMapping("activity")
-@Api("活动相关接口")
+@RequestMapping("user")
+@Api("用户相关接口")
 public class DemoController {
 
-    @GetMapping("detail/{id}")
-    @ApiOperation(value="活动详情")
-    @ApiImplicitParam(name = "id", value = "活动Id",  paramType = "path", required = true, dataType =  "Integer")
-    public Result<ActivityVO> detail(@PathVariable("id") Integer id) {
-        // mock activity info
-        return new Result<>(ActivityVO.mock());
-    }
-
-    @PostMapping("save")
-    @ApiOperation(value="活动新增")
-    public Result<Integer> save(@RequestBody ActivityVO activity) {
+    @PostMapping("create")
+    @ApiOperation(value = "用户创建")
+    public Result<Integer> create(@RequestBody UserVO userVO) {
         return new Result<>(1);
     }
 
+    @PutMapping("update")
+    @ApiOperation(value = "用户更新")
+    public Result<Integer> update(@RequestBody UserVO userVO) {
+        return new Result<>(1);
+    }
+
+    @GetMapping("detail/{id}")
+    @ApiOperation(value = "用户详情")
+    @ApiImplicitParam(name = "id", value = "用户Id", paramType = "path", required = true, dataType = "Integer")
+    public Result<UserVO> detail(@PathVariable("id") Integer id) {
+        return new Result<>(UserVO.getMockUser());
+    }
+
+    @DeleteMapping("delete/{id}")
+    @ApiOperation(value = "用户删除")
+    @ApiImplicitParam(name = "id", value = "用户Id", paramType = "path", required = true, dataType = "Integer")
+    public Result<Integer> delete(@PathVariable("id") Integer id) {
+        return new Result<>(1);
+    }
 }
